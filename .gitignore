@@ -1,0 +1,53 @@
+# Build output
+/target/
+/out/
+/build/
+
+# Maven
+.mvn/timing.properties
+.settings/           # old Eclipse cruft
+.mvn/wrapper/maven-wrapper.jar !  # KEEP the wrapper jar (see note below)
+
+# Logs & runtime files
+*.log
+hs_err_pid*
+replay_pid*
+*.hprof
+
+# Spring Boot
+*.pid
+*.pid.lock
+
+# Local config & secrets (use an example file instead)
+application.properties
+application.yml
+application-*.properties
+application-*.yml
+.env
+*.keystore
+*.p12
+*.jks
+
+# IDEs
+# VS Code
+.vscode/
+.history/
+
+# IntelliJ
+.idea/
+*.iml
+*.iws
+
+# Eclipse
+.project
+.classpath
+.factorypath
+.gradle/
+
+# OS noise
+.DS_Store
+Thumbs.db
+
+# Node/Front-end (if you add a UI)
+node_modules/
+dist/
