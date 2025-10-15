@@ -2,6 +2,7 @@ package com.noelmathen.taskmanager.services.impl;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -49,5 +50,33 @@ public class TaskListServiceImpl implements TaskListService{
     @Override
     public Optional<TaskList> getTaskList(UUID id) {
         return taskListRepository.findById(id);
+    }
+
+    @Override
+    public TaskList updateTaskList(UUID taskListId, TaskList taskList) {
+        if(taskList.getId() == null){
+            throw new IllegalArgumentException("Task List must have an ID!");
+        }
+
+        if(!Objects.equals(taskListId, taskList.getId())){
+            throw new IllegalArgumentException("Changing of ID prohibitted!");
+        }
+
+        TaskList existingTaskList = taskListRepository.findById(taskListId).orElseThrow(() -> new IllegalArgumentException("Task List Not Found!"));
+        
+        existingTaskList.setTitle(taskList.getTitle());
+        existingTaskList.setDescription(taskList.getDescription());
+        existingTaskList.setUpdated(LocalDateTime.now());
+        
+        return taskListRepository.save(existingTaskList);
+    }
+
+    @Override
+    public void deleteTaskList(UUID taskListId){
+        if(taskListId == null){
+            throw new IllegalArgumentException("Task List Doesn't Exist");
+        }
+
+        taskListRepository.deleteById(taskListId);
     }
 }
